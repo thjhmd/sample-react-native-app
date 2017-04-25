@@ -4,6 +4,7 @@ import {
   Text,
   TextInput
 } from 'react-native';
+import { styles } from '../my_styles/styles';
 
 export default class ResultScreen extends Component {
   static navigationOptions = {
@@ -17,29 +18,27 @@ export default class ResultScreen extends Component {
     this.state = {
       name: '' + params.name,
       gender: '' + params.gender,
-      data: 'undefined'
     };
-
-    this.getData();
   }
 
-  async getData() {
-    let name = this.state.name;
-    let gender = this.state.gender;
-    try {
-      let data = await retrieveData(name, gender);
-      this.setState({
-        data: data
-      });
-    } catch(err) {
-      console.error(err);
-    }
-  }
+  // async getData() {
+  //   let name = this.state.name;
+  //   let gender = this.state.gender;
+  //   try {
+  //     let data = await retrieveData(name, gender);
+  //     this.setState({
+  //       data: data
+  //     });
+  //   } catch(err) {
+  //     console.error(err);
+  //   }
+  // }
 
   render() {
     return(
-      <View>
-        <Text>{this.state.data}</Text>
+      <View style={styles.result_container}>
+        <Text>{this.state.name}</Text>
+        <Text>{this.state.gender}</Text>
       </View>
     );
   }
@@ -67,14 +66,14 @@ export default class ResultScreen extends Component {
 //   };
 // }
 
-async function retrieveData(name, gender) {
-  let url = 'http://localhost:9000/api/greetings' + '?name=' + name + '&gender=' + gender;
-  try {
-    let res = await fetch(url);
-    let resJson = res.json();
-    console.log('data: ' + resJson);
-    return resJson;
-  } catch(err) {
-    console.log(err);
-  }
-}
+// async function retrieveData(name, gender) {
+//   let url = 'http://localhost:9000/api/greetings' + '?name=' + name + '&gender=' + gender;
+//   try {
+//     let res = await fetch(url);
+//     let resJson = res.json();
+//     console.log('data: ' + resJson);
+//     return resJson;
+//   } catch(err) {
+//     console.log(err);
+//   }
+// }
